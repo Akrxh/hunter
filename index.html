@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM // QUEST INFO</title>
+    <!-- Cinematic Dark Tech Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --sys-blue: #00d2ff;
+            --sys-blue-glow: rgba(0, 210, 255, 0.4);
+            --sys-blue-dark: #071322;
+            --sys-text-bright: #e3f8ff;
+            --sys-text-dim: #5c83a6;
+            --sys-green: #00ff66;
+            --sys-red: #ff3333;
+            --sys-red-glow: rgba(ff, 51, 51, 0.5);
+            --panel-border: rgba(0, 210, 255, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: #03060a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* Ambient Dark Atmospheric Glow */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(ellipse at center, rgba(0, 150, 255, 0.08) 0%, transparent 70%),
+                radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.9), transparent 80%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* SYSTEM WINDOW FRAME */
+        .system-window {
+            width: 100%;
+            max-width: 460px;
+            background: linear-gradient(180deg, 
+                rgba(10, 26, 46, 0.92) 0%, 
+                rgba(6, 16, 29, 0.95) 50%, 
+                rgba(3, 8, 15, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--panel-border);
+            box-shadow: 
+                0 0 35px rgba(0, 0, 0, 0.9),
+                0 0 15px rgba(0, 210, 255, 0.15),
+                inset 0 0 25px rgba(0, 210, 255, 0.08);
+            position: relative;
+            z-index: 1;
+            padding: 2.2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Authentic Corner Ornaments (CSS Line Art) */
+        .corner {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-color: var(--sys-blue);
+            border-style: solid;
+            pointer-events: none;
+            filter: drop-shadow(0 0 4px var(--sys-blue));
+        }
+
+        .corner-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+        .corner-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+        .corner-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+        .corner-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+        /* HEADER PANEL */
+        .window-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.15);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert-symbol {
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid var(--sys-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--sys-blue);
+            box-shadow: 0 0 8px var(--sys-blue-glow);
+        }
+
+        .header-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--sys-text-bright);
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--sys-blue-glow);
+        }
+
+        .header-controls {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--sys-text-dim);
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+        }
+
+        /* QUEST SUBTITLE */
+        .quest-description {
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--sys-text-bright);
+            letter-spacing: 1.5px;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            padding: 0 0.5rem;
+            text-shadow: 0 0 8px rgba(227, 248, 255, 0.2);
+        }
+
+        /* GOALS SECTION */
+        .goals-title {
+            color: var(--sys-green);
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 12px rgba(0, 255, 106, 0.5);
+        }
+
+        .goals-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .goal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--sys-text-bright);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .goal-item:hover {
+            color: var(--sys-blue);
+            text-shadow: 0 0 8px var(--sys-blue-glow);
+        }
+
+        .goal-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .goal-progress {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--sys-blue);
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px var(--sys-blue-glow);
+        }
+
+        .goal-item.cleared .goal-label {
+            color: var(--sys-text-dim);
+            text-decoration: line-through;
+        }
+
+        .goal-item.cleared .goal-progress {
+            color: var(--sys-green);
+            text-shadow: 0 0 8px rgba(0, 255, 106, 0.6);
+        }
+
+        /* CAUTION WARNING */
+        .caution-box {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 0.5rem;
+        }
+
+        .caution-head {
+            color: var(--sys-red);
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--sys-red-glow);
+            margin-bottom: 0.25rem;
+        }
+
+        .caution-body {
+            color: var(--sys-text-bright);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        /* TIMER ICON & DISPLAY */
+        .timer-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timer-dial {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid var(--sys-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 12px var(--sys-blue-glow), inset 0 0 8px var(--sys-blue-glow);
+            position: relative;
+        }
+
+        .timer-dial svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--sys-blue);
+            stroke-width: 1.8;
+            fill: none;
+            filter: drop-shadow(0 0 3px var(--sys-blue));
+        }
+
+        .timer-text {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--sys-text-dim);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="system-window">
+        <!-- Corner Filigree -->
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <!-- HEADER -->
+        <div class="window-header">
+            <div class="header-title-wrap">
+                <div class="alert-symbol">!</div>
+                <div class="header-text">QUEST INFO</div>
+            </div>
+            <div class="header-controls">_ ✕</div>
+        </div>
+
+        <!-- SUBTITLE -->
+        <div class="quest-description">
+            DAILY QUEST: PREPARATION TO BECOME A FORMIDABLE COMBATANT
+        </div>
+
+        <!-- GOALS -->
+        <div class="goals-title">GOALS</div>
+
+        <div class="goals-list" id="goals-container">
+            <!-- Dynamic goals rendered via JS -->
+        </div>
+
+        <!-- CAUTION -->
+        <div class="caution-box">
+            <div class="caution-head">CAUTION!</div>
+            <div class="caution-body">IF THE DAILY QUEST REMAINS INCOMPLETE, PENALTIES WILL BE GIVEN ACCORDINGLY.</div>
+        </div>
+
+        <!-- TIMER -->
+        <div class="timer-section">
+            <div class="timer-dial">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"/>
+                    <polyline points="12 7 12 12 15 15"/>
+                </svg>
+            </div>
+            <div class="timer-text" id="countdown-display">23:59:59 REMAINING</div>
+        </div>
+    </div>
+
+    <script>
+        // Quest structure based on your goals
+        const initialQuests = [
+            { id: "e1", name: "- EXERCISE", target: 45, current: 0, unit: "MIN" },
+            { id: "s1", name: "- STUDY", target: 6, current: 0, unit: "HR" },
+            { id: "a1", name: "- ANIME", target: 2, current: 0, unit: "HR" },
+            { id: "r1", name: "- READING", target: 1, current: 0, unit: "HR" }
+        ];
+
+        let state = JSON.parse(localStorage.getItem('solo_system_v2')) || initialQuests;
+
+        function saveState() {
+            localStorage.setItem('solo_system_v2', JSON.stringify(state));
+        }
+
+        function toggleGoal(index) {
+            // Toggle between incomplete (0) and complete (target)
+            if (state[index].current >= state[index].target) {
+                state[index].current = 0;
+            } else {
+                state[index].current = state[index].target;
+            }
+            saveState();
+            renderGoals();
+        }
+
+        function renderGoals() {
+            const container = document.getElementById('goals-container');
+            container.innerHTML = '';
+
+            state.forEach((item, idx) => {
+                const isCleared = item.current >= item.target;
+                const row = document.createElement('div');
+                row.className = `goal-item ${isCleared ? 'cleared' : ''}`;
+                row.onclick = () => toggleGoal(idx);
+
+                row.innerHTML = `
+                    <div class="goal-label">${item.name}</div>
+                    <div class="goal-progress">[${item.current}/${item.target}${item.unit}]</div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        // Real-time Countdown Timer until Midnight Reset
+        function updateTimer() {
+            const now = new Date();
+            const midnight = new Date();
+            midnight.setHours(24, 0, 0, 0);
+            
+            const diff = midnight - now;
+            const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+            const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+            const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+
+            document.getElementById('countdown-display').innerText = `${hours}:${minutes}:${seconds} REMAINING`;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+        renderGoals();
+    </script>
+</body>
+</html>
