@@ -1,0 +1,30 @@
+{
+  "system_title": "QUEST INFO",
+  "quest_description": "DAILY QUEST: PREPARATION TO BECOME A FORMIDABLE COMBATANT",
+  "goals": [
+    {
+      "id": "e1",
+      "name": "- EXERCISE",
+      "target": 45,
+      "unit": "MIN"
+    },
+    {
+      "id": "s1",
+      "name": "- STUDY",
+      "target": 6,
+      "unit": "HR"
+    },
+    {
+      "id": "a1",
+      "name": "- ANIME",
+      "target": 2,
+      "unit": "HR"
+    },
+    {
+      "id": "r1",
+      "name": "- READING",
+      "target": 1,
+      "unit": "HR"
+    }
+  ]
+}
